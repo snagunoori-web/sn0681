@@ -162,7 +162,7 @@ public class RentalAgreement {
                 " Tool Code: " + toolCode +"\n"+
                 " Tool Type: " + toolType +"\n"+
                 " Brand: " + brand +"\n"+
-                " Rental Days: " + rentalDays +
+                " Rental Days: " + rentalDays +"\n"+
                 " CheckOut Date: " + checkOutDate +"\n"+
                 " Due Date: " + dueDate +"\n"+
                 " Daily Rental Charge: " + dailyRentalCharge +"\n"+

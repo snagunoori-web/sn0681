@@ -1,6 +1,7 @@
 package com.txrental.tool.service;
 
 
+import com.txrental.tool.CustomToolRentalException;
 import com.txrental.tool.entity.Tool;
 import com.txrental.tool.entity.ToolRental;
 import com.txrental.tool.formatter.RentalFormatter;
@@ -42,7 +43,7 @@ public class ToolRentalService {
         return toolRentalRepository.findByToolType(toolType);
     }
 
-    public RentalAgreement generateRentalAgreement(Checkout checkout){
+    public RentalAgreement generateRentalAgreement(Checkout checkout) throws CustomToolRentalException {
         String toolCode = checkout.getToolCode();
 
         /*  Reading data from database */
@@ -52,6 +53,9 @@ public class ToolRentalService {
          String toolType =  toolDetails.getToolType();
          String brand = toolDetails.getBrand();
          int rentingDays = checkout.getRentingDays();
+         if(checkout.getDiscountPercentage() > 100 ||  checkout.getDiscountPercentage() < 1 ){
+             throw new CustomToolRentalException("Invalid Discount Percentage");
+        }
          String discountPercentage =  RentalFormatter.percetageFormat(checkout.getDiscountPercentage());
          LocalDate checkOutDate = checkout.getCheckOutDate();
          double dailyCharge = toolRental.getDailyCharge();
@@ -117,7 +121,7 @@ public class ToolRentalService {
         boolean isWeekendCharge = toolRental.getWeekendCharge().equalsIgnoreCase("Yes") ;
         boolean isHolidayCharge = toolRental.getHolidayCharge().equalsIgnoreCase("Yes") ;
 
-        for(int i=1; i<=noOfRentalDays; i++){
+        for(int i=0; i<noOfRentalDays; i++){
             LocalDate date = checkoutDate.plusDays(i);
             DayOfWeek dayOfWeek = date.getDayOfWeek();
             System.out.println(checkoutDate.plusDays(i) +"  "+ dayOfWeek);
