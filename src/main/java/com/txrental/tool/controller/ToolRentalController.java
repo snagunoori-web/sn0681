@@ -66,7 +66,7 @@ class ToolRentalController {
 	}
 
 	/**
-	 *  To checkout and generate Rental Agreement
+	 *  To checkout and generate Rental Agreement for renting tool
 	 * @param checkout
 	 * @return
 	 */
