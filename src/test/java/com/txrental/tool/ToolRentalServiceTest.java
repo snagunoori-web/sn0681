@@ -7,6 +7,8 @@ import com.txrental.tool.service.ToolRentalService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,6 +23,8 @@ public class ToolRentalServiceTest {
     @Autowired
     private ToolRentalService toolRentalService;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
+    private static final Logger log = LoggerFactory.getLogger(ToolRentalServiceTest.class);
+
 
 
     /**
@@ -81,7 +85,7 @@ public class ToolRentalServiceTest {
         Assert.assertEquals("$3.58",rentalAgreement.getFinalCharge());
 
         /* Print RentalAgreement*/
-        System.out.println(rentalAgreement.toString());
+        log.info(rentalAgreement.toString());
 
     }
 
@@ -126,7 +130,7 @@ public class ToolRentalServiceTest {
        Assert.assertEquals("$3.35",rentalAgreement.getFinalCharge());
 
         /* Print RentalAgreement*/
-        System.out.println(rentalAgreement.toString());
+        log.info(rentalAgreement.toString());
 
     }
 
@@ -169,7 +173,7 @@ public class ToolRentalServiceTest {
         Assert.assertEquals("$8.97",rentalAgreement.getFinalCharge());
 
         /* Print RentalAgreement*/
-        System.out.println(rentalAgreement.toString());
+        log.info(rentalAgreement.toString());
 
     }
 
@@ -218,7 +222,7 @@ public class ToolRentalServiceTest {
         Assert.assertEquals("$17.94",rentalAgreement.getFinalCharge());
 
         /* Print RentalAgreement*/
-        System.out.println(rentalAgreement.toString());
+        log.info(rentalAgreement.toString());
 
     }
 
@@ -264,7 +268,7 @@ public class ToolRentalServiceTest {
         Assert.assertEquals("$1.50",rentalAgreement.getFinalCharge());
 
         /* Print RentalAgreement*/
-        System.out.println(rentalAgreement.toString());
+        log.info(rentalAgreement.toString());
 
     }
 
