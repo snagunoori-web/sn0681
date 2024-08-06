@@ -1,9 +1,9 @@
-Overview
-   **Tool-Rental-MicroService** :  This application build  as micro-service to calculate rental of the tool for provided details and it will generate rental
+About
+**Tool-Rental-MicroService** :  This application build as micro-service to calculate rental of the tool for provided details and it will generate rental
 agreement.
 
 
-**Specification**
+****Specification****
 The demonstration is to code and test a simple tool rental application. 
  - The application is a point-of-sale tool for a store, like Home Depot, that rents big tools. 
  - Customers rent a tool for a specified number of days. 
@@ -17,22 +17,24 @@ charge.
 **Tools**
 The tools available for rental are as follows:
 
-**Daily      Weekday charge   Weekend charge   Holiday charge**  
-$1.99         Yes                Yes               No
-$1.49         Yes                 No                Yes
-$2.99         Yes                 No                 No
+** Tool       Daily      Weekday charge   Weekend charge   Holiday charge**  
+   Ladder     $1.99         Yes                Yes               No
+ Chainsaw      $1.49        Yes                No               Yes
+Jackhammer    $2.99         Yes                No                 No
 
 Each tool instance has the following attributes: 
 **Tool Code** - Unique identifier for a tool instance
+
 **Tool Type** - The type of tool. The type also specifies the daily rental charge, and the days for which the daily rental charge applies.
+
 **Brand** - The brand of the ladder, chain saw or jackhammer.
 
 
 
 **Holidays**
 There are only two (2) holidays in the calendar:
-● Independence Day, July 4th - If falls on weekend, it is observed on the closest weekday (if Sat, then Friday before, if Sunday, then Monday after)
-● Labor Day - First Monday in September
+   - Independence Day, July 4th - If falls on weekend, it is observed on the closest weekday (if Sat, then Friday before, if Sunday, then Monday after)
+   - Labor Day - First Monday in September
 
 
 **Checkout**
