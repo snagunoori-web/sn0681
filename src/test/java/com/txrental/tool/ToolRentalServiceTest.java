@@ -32,20 +32,36 @@ public class ToolRentalServiceTest {
      *   Excepting Exception for invalid input percentage - 101%
      */
     @Test
-    public void testGenerateRentalAgreement_Jackhammer_Ridgid_Renting_3Days()  {
+    public void testGenerateRentalAgreement_Jackhammer_Ridgid_Renting_3Days_ThrowsException()  {
 
         LocalDate localDate = LocalDate.parse("09/03/15", formatter); // MM/dd/yy
         Checkout checkout = new Checkout("JAKR" ,5, 101, localDate);
+        Exception exception = Assert.assertThrows(Exception.class, () -> {
+            toolRentalService.generateRentalAgreement(checkout);
+        });
 
-        /* Generate Agreement */
-        try
-        {
-            RentalAgreement rentalAgreement = toolRentalService.generateRentalAgreement(checkout);
-             Assert.assertNull(rentalAgreement);
-        }catch (Exception e){
-            Assert.assertTrue(true);
-            Assert.assertTrue("Invalid Discount Percentage, range should be in 0-100%".equals(e.getMessage()));
-        }
+        String expectedMessage = "Invalid Discount Percentage, range should be in 0-100%";
+        String actualMessage = exception.getMessage();
+        Assert.assertTrue(actualMessage.contains(expectedMessage));
+
+    }
+
+
+    /**
+     *  To test for inalid Renting Days - -1
+     */
+    @Test
+    public void testGenerateRentalAgreement_InvalidRentingDays_ThrowsException()  {
+
+        LocalDate localDate = LocalDate.parse("09/03/15", formatter); // MM/dd/yy
+        Checkout checkout = new Checkout("JAKR" ,-1, 0, localDate);
+        Exception exception = Assert.assertThrows(Exception.class, () -> {
+            toolRentalService.generateRentalAgreement(checkout);
+        });
+
+        String expectedMessage = "Invalid Renting Days, it should be minimum 1 Day";
+        String actualMessage = exception.getMessage();
+        Assert.assertTrue(actualMessage.contains(expectedMessage));
 
     }
 
