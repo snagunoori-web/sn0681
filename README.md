@@ -17,10 +17,8 @@ charge.
 **Tools**
 The tools available for rental are as follows:
 
-** Tool       Daily      Weekday charge   Weekend charge   Holiday charge**  
-   Ladder     $1.99         Yes                Yes               No
- Chainsaw      $1.49        Yes                No               Yes
-Jackhammer    $2.99         Yes                No                 No
+<img width="679" alt="Screenshot 2024-08-06 at 9 59 25 AM" src="https://github.com/user-attachments/assets/414823c6-cbcc-48a5-bf94-8b778b1130d6">
+
 
 Each tool instance has the following attributes: 
 **Tool Code** - Unique identifier for a tool instance
