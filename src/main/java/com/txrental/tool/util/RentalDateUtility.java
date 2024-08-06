@@ -7,40 +7,6 @@ import java.time.temporal.TemporalAdjusters;
 
 public class RentalDateUtility {
 
-
-    public static  void main(String args[]){
-
-        //default, ISO_LOCAL_DATE
-      /*  LocalDate july4weekDay_localDate = LocalDate.parse("2022-07-04");
-        System.out.println(july4weekDay_localDate);
-
-        LocalDate july4weekEnd_localDate = LocalDate.parse("2020-07-04");
-        System.out.println("july4weekEnd_localDate" + july4weekEnd_localDate);
-
-        System.out.println("---------------------------------------");
-        System.out.println("isDayJuly4thAndWeekDay "+isDayJuly4thAndWeekDay(LocalDate.parse("2022-07-04")));
-
-        System.out.println("---------------------------------------");
-        System.out.println("isNextDayJuly4thOnSaturday " +isNextDayJuly4thOnSaturday(LocalDate.parse("2020-07-03")));
-
-        System.out.println("---------------------------------------");
-        System.out.println("isPreviosDayJuly4thOnSunday " +isPreviosDayJuly4thOnSunday(LocalDate.parse("2021-07-05")));
-        System.out.println("---------------------------------------");
-
-        System.out.println("isLabourDay " +isLabourDay(LocalDate.parse("2024-09-02")));
-        System.out.println("---------------------------------------");
-
-
-       */
-       // rentalCalculation(LocalDate.parse("2022-07-01"), 5, 1.99);
-        System.out.println("---------------------------------------");
-
-        double amount = 200;
-        double percentage = 15;
-
-    }
-
-
     /**
      *  To check and return whether they given date is Labor Holiday or Not
      * @param localDate
@@ -57,7 +23,6 @@ public class RentalDateUtility {
         return false;
 
     }
-
 
     /**
      *  To check whether given date is July 4 and on Is on Weekday
@@ -77,7 +42,6 @@ public class RentalDateUtility {
      * @return
      */
     public static boolean isDayJuly4thAndWeekend(LocalDate localDate){
-        System.out.println("LocalDate: "  + localDate.toString());
         int day = localDate.getDayOfMonth();
         Month month = localDate.getMonth();
         DayOfWeek dayOfWeek = localDate.getDayOfWeek();
