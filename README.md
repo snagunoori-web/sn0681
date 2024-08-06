@@ -1,5 +1,5 @@
 Overview
-   **tool-rental** :  This application build to calculate rental of the tool for provided details and it will generate rental
+   **Tool-Rental-MicroService** :  This application build  as micro-service to calculate rental of the tool for provided details and it will generate rental
 agreement.
 
 
@@ -66,6 +66,8 @@ rounded half up to cents.
    - spring-boot application with rest
    - Used In memory data base  h2database to load test data on start up application.
 
+**Database**
+    Used h2database to load test data
 
 **Packages:**
    created packages as per java standards

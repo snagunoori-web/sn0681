@@ -27,7 +27,7 @@ public class ToolRentalValidator {
         }
 
         if (StringUtils.isBlank(checkout.getToolCode() )) {
-            throw new CustomToolRentalException("Checkout date is missing");
+            throw new CustomToolRentalException("Tool code is missing");
         }
 
     }
