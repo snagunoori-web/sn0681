@@ -16,7 +16,11 @@ charge.
 
 **Tools**
 The tools available for rental are as follows:
-  ![](/Users/snagunoori/Desktop/Screenshot 2024-08-05 at 10.07.25 PM.png)
+
+**Daily      Weekday charge   Weekend charge   Holiday charge**  
+$1.99         Yes                Yes               No
+$1.49         Yes                 No                Yes
+$2.99         Yes                 No                 No
 
 Each tool instance has the following attributes: 
 **Tool Code** - Unique identifier for a tool instance
