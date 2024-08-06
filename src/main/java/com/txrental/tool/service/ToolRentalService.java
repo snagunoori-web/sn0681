@@ -123,6 +123,8 @@ public class ToolRentalService {
         boolean isWeekendCharge = toolRental.getWeekendCharge().equalsIgnoreCase("Yes") ;
         boolean isHolidayCharge = toolRental.getHolidayCharge().equalsIgnoreCase("Yes") ;
 
+        /* Iterating each renting day to find whether it is Weekday, Weekend,
+          Labor Day or Independence days to calculate rental appropriate*/
         for(int i=0; i<noOfRentalDays; i++){
             LocalDate date = checkoutDate.plusDays(i);
             DayOfWeek dayOfWeek = date.getDayOfWeek();
