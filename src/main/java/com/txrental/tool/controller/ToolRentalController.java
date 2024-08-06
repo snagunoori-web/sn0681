@@ -1,7 +1,7 @@
 package com.txrental.tool.controller;
 
 
-import com.txrental.tool.CustomToolRentalException;
+import com.txrental.tool.exception.CustomToolRentalException;
 import com.txrental.tool.entity.Tool;
 import com.txrental.tool.entity.ToolRental;
 import com.txrental.tool.model.Checkout;
@@ -73,10 +73,6 @@ class ToolRentalController {
 	@PostMapping("/checkout")
 	public RentalAgreement checkout(@RequestBody Checkout checkout) throws CustomToolRentalException {
 		log.info(checkout.toString());
-		/* Validate */
-		/*if ( checkout.getRentingDays() < 1 ) {
-			throw new CustomToolRentalException("Invalid Renting Days, it should be minimum 1 Day");
-		}*/
         return toolRentalService.generateRentalAgreement(checkout);
 	}
 

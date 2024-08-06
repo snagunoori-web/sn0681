@@ -1,7 +1,7 @@
 package com.txrental.tool.service;
 
 
-import com.txrental.tool.CustomToolRentalException;
+import com.txrental.tool.exception.CustomToolRentalException;
 import com.txrental.tool.entity.Tool;
 import com.txrental.tool.entity.ToolRental;
 import com.txrental.tool.formatter.RentalFormatter;
@@ -10,6 +10,7 @@ import com.txrental.tool.model.RentalAgreement;
 import com.txrental.tool.model.RentalAmount;
 import com.txrental.tool.repository.ToolRentalRepository;
 import com.txrental.tool.repository.ToolRepository;
+import com.txrental.tool.validator.ToolRentalValidator;
 import com.txrental.tool.util.RentalDateUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,9 @@ public class ToolRentalService {
     @Autowired
     private ToolRentalRepository toolRentalRepository;
 
+    @Autowired
+    private ToolRentalValidator toolRentalValidator;
+
     private static final Logger log = LoggerFactory.getLogger(ToolRentalService.class);
 
     public List<Tool> listAllToools() {
@@ -39,23 +43,20 @@ public class ToolRentalService {
         return toolRepository.findByToolCode(toolCode);
     }
 
-    public ToolRental findToolRentalByToolType(String toolType) {
-        return toolRentalRepository.findByToolType(toolType);
-    }
-
     public RentalAgreement generateRentalAgreement(Checkout checkout) throws CustomToolRentalException {
-        String toolCode = checkout.getToolCode();
 
-        /*  Reading data from database */
-        Tool toolDetails =  toolRepository.findByToolCode(toolCode);;
-        ToolRental toolRental =  toolRentalRepository.findByToolType(toolDetails.getToolType());
+           /*   Validate   */
+          toolRentalValidator.validate(checkout);
+
+         /*  Reading data from database */
+         String toolCode = checkout.getToolCode();
+         Tool toolDetails =  toolRepository.findByToolCode(toolCode);
+         ToolRental toolRental =  toolRentalRepository.findByToolType(toolDetails.getToolType());
 
          String toolType =  toolDetails.getToolType();
          String brand = toolDetails.getBrand();
          int rentingDays = checkout.getRentingDays();
-         if(checkout.getDiscountPercentage() > 100 ||  checkout.getDiscountPercentage() < 1 ){
-             throw new CustomToolRentalException("Invalid Discount Percentage");
-        }
+
          String discountPercentage =  RentalFormatter.percetageFormat(checkout.getDiscountPercentage());
          LocalDate checkOutDate = checkout.getCheckOutDate();
          double dailyCharge = toolRental.getDailyCharge();
@@ -68,7 +69,7 @@ public class ToolRentalService {
         double discountAmount=  calculateDiscountAmount(rentalAmount.getRentalAmount(), checkout.getDiscountPercentage());
         double finalCharge = rentalAmount.getRentalAmount() - discountAmount;
 
-        /*   formatting   */
+        /*   formatting  Date , Number  */
         String formattedDiscountAmt = RentalFormatter.numberFormatWithDollar(discountAmount);
         String formattedDailyCharge= RentalFormatter.numberFormatWithDollar(dailyCharge);
         String formattedFinalCharge = RentalFormatter.numberFormatWithDollar(finalCharge);
@@ -93,13 +94,14 @@ public class ToolRentalService {
       return rentalAgreement;
     }
 
+
     /**
-     *  To calculate discount amount
+     *
      * @param amount
      * @param percentage
      * @return
      */
-    public static double calculateDiscountAmount(double amount, double percentage) {
+    private  double calculateDiscountAmount(double amount, double percentage) {
         return (amount * percentage) / 100;
     }
 

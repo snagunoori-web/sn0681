@@ -1,13 +1,9 @@
-package com.txrental.tool;
+package com.txrental.tool.exception;
 
 public class CustomToolRentalException extends Exception{
 
     public CustomToolRentalException(String message) {
         super(message);
-    }
-
-    public CustomToolRentalException(String message, Throwable cause) {
-        super(message, cause);
     }
 
 }

@@ -1,17 +1,14 @@
 package com.txrental.tool;
 
+import com.txrental.tool.exception.CustomToolRentalException;
 import com.txrental.tool.model.Checkout;
 import com.txrental.tool.model.RentalAgreement;
 import com.txrental.tool.service.ToolRentalService;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
@@ -43,7 +40,7 @@ public class ToolRentalServiceTest {
              Assert.assertNull(rentalAgreement);
         }catch (Exception e){
             Assert.assertTrue(true);
-            Assert.assertTrue("Invalid Discount Percentage".equals(e.getMessage()));
+            Assert.assertTrue("Invalid Discount Percentage, range should be in 0-100%".equals(e.getMessage()));
         }
 
     }
@@ -60,15 +57,15 @@ public class ToolRentalServiceTest {
      *             July 4, 2020 Saturday
      *
      *             *** Expected Agreement **
-     *             Rental Days: 3
-     *             CheckOut Date: 07/02/20
-     *             Due Date: 07/05/20
-     *             Daily Rental Charge: $1.99
-     *             Charge Days: 2
-     *             PreDiscount Charge: $3.98
-     *             Discount Percent: 10.0%
-     *             Discount Amount: $0.40
-     *             Final Charge: $3.58
+     *   Rental Days: 3
+     *  CheckOut Date: 07/02/20
+     *  Due Date: 07/05/20
+     *  Daily Rental Charge: $1.99
+     *  Charge Days: 2
+     *  PreDiscount Charge: $3.98
+     *  Discount Percent: 10.0%
+     *  Discount Amount: $0.40
+     *  Final Charge: $3.58
      *
      */
     @Test
@@ -81,7 +78,7 @@ public class ToolRentalServiceTest {
         RentalAgreement rentalAgreement = toolRentalService.generateRentalAgreement(checkout);
         Assert.assertNotNull(rentalAgreement);
         Assert.assertNotNull(rentalAgreement.getFinalCharge());
-        //Assert.assertEquals("$3.58",rentalAgreement.getFinalCharge());
+        Assert.assertEquals("$3.58",rentalAgreement.getFinalCharge());
 
         /* Print RentalAgreement*/
         System.out.println(rentalAgreement.toString());
@@ -104,15 +101,15 @@ public class ToolRentalServiceTest {
      *   July 7, 2015 Tuesday     Charge
      *
      *
-     *   Rental Days: 5
+     *  Rental Days: 5
      *  CheckOut Date: 07/02/15
      *  Due Date: 07/07/15
      *  Daily Rental Charge: $1.49
-     *  Charge Days: 4
-     *  PreDiscount Charge: $5.96
+     *  Charge Days: 3
+     *  PreDiscount Charge: $4.47
      *  Discount Percent: 25.0%
-     *  Discount Amount: $1.49
-     *  Final Charge: $4.47
+     *  Discount Amount: $1.12
+     *  Final Charge: $3.35
 
      *
      */
@@ -126,7 +123,7 @@ public class ToolRentalServiceTest {
         RentalAgreement rentalAgreement = toolRentalService.generateRentalAgreement(checkout);
         Assert.assertNotNull(rentalAgreement);
         Assert.assertNotNull(rentalAgreement.getFinalCharge());
-       Assert.assertEquals("$4.47",rentalAgreement.getFinalCharge());
+       Assert.assertEquals("$3.35",rentalAgreement.getFinalCharge());
 
         /* Print RentalAgreement*/
         System.out.println(rentalAgreement.toString());
@@ -148,18 +145,17 @@ public class ToolRentalServiceTest {
      *   Checkout Date : Sep 8, 2015 Tuesday   -  Charge
      *   Checkout Date : Sep 9, 2015 Wednesday  -  Charge
      *
+     *  Rental Days: 6
      *  CheckOut Date: 09/03/15
      *  Due Date: 09/09/15
      *  Daily Rental Charge: $2.99
-     *  Charge Days: 4
-     *  PreDiscount Charge: $11.96
+     *  Charge Days: 3
+     *  PreDiscount Charge: $8.97
      *  Discount Percent: 0.0%
      *  Discount Amount: $0.00
-     *  Final Charge: $11.96
+     *  Final Charge: $8.97
      *
      */
-
-
     @Test
     public void testGenerateRentalAgreement_Jackhammer_DeWalt_Renting_6Days() throws CustomToolRentalException {
 
@@ -170,7 +166,7 @@ public class ToolRentalServiceTest {
         RentalAgreement rentalAgreement = toolRentalService.generateRentalAgreement(checkout);
         Assert.assertNotNull(rentalAgreement);
         Assert.assertNotNull(rentalAgreement.getFinalCharge());
-        Assert.assertEquals("$11.96",rentalAgreement.getFinalCharge());
+        Assert.assertEquals("$8.97",rentalAgreement.getFinalCharge());
 
         /* Print RentalAgreement*/
         System.out.println(rentalAgreement.toString());
@@ -206,6 +202,7 @@ public class ToolRentalServiceTest {
      *  Discount Percent: 0.0%
      *  Discount Amount: $0.00
      *  Final Charge: $17.94
+     *
      */
 
     @Test
@@ -264,7 +261,7 @@ public class ToolRentalServiceTest {
         RentalAgreement rentalAgreement = toolRentalService.generateRentalAgreement(checkout);
         Assert.assertNotNull(rentalAgreement);
         Assert.assertNotNull(rentalAgreement.getFinalCharge());
-        //Assert.assertEquals("$17.94",rentalAgreement.getFinalCharge());
+        Assert.assertEquals("$1.50",rentalAgreement.getFinalCharge());
 
         /* Print RentalAgreement*/
         System.out.println(rentalAgreement.toString());
