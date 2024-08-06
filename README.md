@@ -29,6 +29,7 @@ Each tool instance has the following attributes:
 
 **Brand** - The brand of the ladder, chain saw or jackhammer.
 
+<img width="636" alt="Screenshot 2024-08-05 at 10 07 25 PM" src="https://github.com/user-attachments/assets/e8097693-a6e4-40ea-b332-3947175eeed2">
 
 
 **Holidays**
